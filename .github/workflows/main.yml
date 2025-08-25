@@ -5,7 +5,7 @@ on:
     branches:
       - main
   schedule:
-    - cron: "* */8 * * *"
+    - cron: "*/10 */4 * * *"
 
 jobs:
   autogreen:
@@ -18,11 +18,11 @@ jobs:
       - name: Clone repository
         uses: actions/checkout@v3
 
-      - name: Auto green
+      - name: Auto Commit
         run: |
           git config --local user.email "dvaree.wu@hotmail.com"
           git config --local user.name "${{ github.actor }}"
           git remote set-url origin https://${{ github.actor }}:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}
           git pull --rebase
-          git commit --allow-empty -m "a commit a day keeps your girlfriend away"
+          git commit --allow-empty -m "AUTO-COMMIT by githu action"
           git push
